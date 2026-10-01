@@ -2,14 +2,17 @@ from pathlib import Path
 from html import escape
 import json
 from zipfile import ZipFile, ZIP_DEFLATED
-from design import site_header, site_footer, contact_section
+from design import site_header, site_footer, contact_section, ICON_ARROW_UP_RIGHT
 ROOT=Path(__file__).parent
 SITE='https://www.metehancakal.com'
 WA='https://wa.me/905432776463?text=Merhaba%2C%20dan%C4%B1%C5%9Fmanl%C4%B1k%20s%C3%BCreci%20ve%20randevu%20hakk%C4%B1nda%20bilgi%20almak%20istiyorum.'
 NAV=[('yaklasim.html','Yaklaşımım'),('calisma-alanlari.html','Çalışma alanları'),('hakkimda.html','Hakkımda'),('sss.html','Merak edilenler')]
 brand='<span class="monogram" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M7 31V15C7 5 20 5 20 15v16M20 31V15c0-10 13-10 13 0v16M3 31h34" stroke="currentColor" stroke-width="1.3"/><circle cx="20" cy="35" r="1.5" fill="currentColor"/></svg></span><span><strong>Metehan Çakal</strong><small>Uzman Psikolojik Danışman</small></span>'
 
-def link(url,label,cls='text-link'):return f'<a class="{cls}" href="{url}">{label}</a>'
+def link(url,label,cls='text-link'):
+    if cls=='text-link':
+        return f'<a class="{cls}" href="{url}"><span>{label}</span><span class="link-arrow" aria-hidden="true">{ICON_ARROW_UP_RIGHT}</span></a>'
+    return f'<a class="{cls}" href="{url}">{label}</a>'
 def eyebrow(s):return f'<div class="eyebrow">{s}</div>'
 def cta():return contact_section(WA)
 def page(file,title,desc,body):
